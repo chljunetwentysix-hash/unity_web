@@ -129,11 +129,11 @@
             onAuthStateChanged(auth, (user) => {
                 if (user) {
                     // 如果有設定 displayName 就顯示名字，否則顯示 Email 前綴
-                    const userName = user.displayName || user.email.split('@')[0];
+                    const displayDisplayName = user.displayName || user.email.split('@')[0];
                     userStatusDiv.innerHTML = `
-                        <span class="small me-2 text-primary fw-bold">${userName} 同學</span>
+                        <span class="small me-2 text-primary fw-bold">${displayDisplayName} 同學</span>
                         <a href="dashboard.html" class="btn btn-dashboard btn-sm shadow-sm">
-                            <i class="bi bi-speedometer2 me-1"></i>後台
+                        <i class="bi bi-speedometer2 me-1"></i>後台
                         </a>
                     `;
                 } else {
