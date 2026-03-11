@@ -135,7 +135,8 @@
 
         const studentId = userEmail.split('@')[0];
         // 檔案命名規則：uploads/學號_檔名
-        const storageRef = ref(storage, `uploads/${studentId}_${file.name}`);
+        const safeFileName = file.name.replace(/\s+/g, '_'); // 將空格替換為底線
+        const storageRef = ref(storage, `uploads/${studentId}/${safeFileName}`);
         const uploadTask = uploadBytesResumable(storageRef, file);
 
         uploadBtn.disabled = true;
