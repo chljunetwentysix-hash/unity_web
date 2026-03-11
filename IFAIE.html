@@ -101,9 +101,10 @@
 
             onAuthStateChanged(auth, (user) => {
                 if (user) {
-                    const studentId = user.email.split('@')[0];
+                    const displayUserName = user.displayName || user.email.split('@')[0];
+        
                     userStatusDiv.innerHTML = `
-                        <span class="small me-2 text-primary fw-bold">${studentId} 同學</span>
+                        <span class="small me-2 text-primary fw-bold">${displayUserName} 同學</span>
                         <a href="dashboard.html" class="btn btn-dashboard btn-sm shadow-sm">
                             <i class="bi bi-speedometer2 me-1"></i>後台
                         </a>
