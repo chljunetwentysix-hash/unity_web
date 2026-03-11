@@ -172,7 +172,7 @@
             signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     alert("登入成功！");
-                    window.location.href = "index.html"; 
+                    window.location.href = "dashboard.html"; 
                 })
                 .catch((error) => {
                     submitBtn.disabled = false;

@@ -5,157 +5,132 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <title>註冊新帳號 - Unity教學網站</title>
+    <title>學生後台 - Unity教學網站</title>
     <style>
-        body {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
-                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=1920');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-        .navbar {
-            background-color: rgba(255, 255, 255, 0.9) !important;
-            backdrop-filter: blur(5px);
-        }
-        .register-wrapper {
-            flex-grow: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-        }
-        .register-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
-            padding: 2.5rem;
-            width: 100%;
-            max-width: 450px;
-            color: white;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-        }
-        .form-control {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white !important;
-        }
-        .form-control:focus {
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border-color: #0d6efd;
-            box-shadow: none;
-        }
-        .btn-unity {
-            background: #0d6efd;
-            border: none;
-            padding: 12px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        .btn-unity:hover {
-            background: #0b5ed7;
-            transform: translateY(-2px);
-        }
+        body { background: #f8f9fa; min-height: 100vh; }
+        .sidebar { background: #212529; color: white; min-height: 100vh; position: sticky; top: 0; }
+        .nav-link { color: rgba(255,255,255,0.8); transition: 0.3s; }
+        .nav-link:hover, .nav-link.active { color: #fff; background: rgba(255,255,255,0.1); }
+        .card { border: none; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: transform 0.3s; }
+        .card:hover { transform: translateY(-5px); }
+        .course-icon { font-size: 2.5rem; }
     </style>
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-            <a class="navbar-brand fw-bold" href="index.html">Unity教學網站</a>
-        </div>
-    </nav>
+<div class="container-fluid">
+    <div class="row">
+        <nav class="col-md-3 col-lg-2 d-md-block sidebar p-3 shadow">
+            <h4 class="fw-bold mb-4 text-info text-center"><i class="bi bi-unity"></i> 學習後台</h4>
+            <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link active rounded"><i class="bi bi-house-door me-2"></i>管理首頁</a></li>
+                <li class="nav-item mb-2"><a href="index.html" class="nav-link rounded"><i class="bi bi-book me-2"></i>回到課程首頁</a></li>
+                <hr class="text-white-50">
+                <li class="nav-item"><a href="#" id="logoutBtn" class="nav-link text-danger rounded"><i class="bi bi-box-arrow-right me-2"></i>安全登出</a></li>
+            </ul>
+        </nav>
 
-    <div class="register-wrapper">
-        <div class="register-card text-center">
-            <div class="mb-4">
-                <div class="display-6 mb-2 text-info"><i class="bi bi-person-plus-fill"></i></div>
-                <h2 class="fw-bold">Create Account</h2>
-                <p class="text-white-50 small">加入建功高中資訊社，開啟你的遊戲開發之路</p>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 py-4">
+            <div class="d-flex justify-content-between align-items-center mb-4 pb-2 border-bottom">
+                <h1 class="h3 fw-bold">歡迎回來，<span id="displayStudentName" class="text-primary">載入中...</span></h1>
+                <div class="badge bg-dark p-2">學號：<span id="displayStudentId">---</span></div>
             </div>
 
-            <form id="registerForm"> 
-                <div class="mb-3 text-start">
-                    <label class="form-label small">使用者名稱</label>
-                    <input type="text" id="NameInput" class="form-control" placeholder="您的姓名或暱稱" required>
+            <div class="row g-4 mb-5">
+                <div class="col-md-4">
+                    <div class="card p-4 text-center border-start border-info border-5">
+                        <div class="course-icon text-info mb-2"><i class="bi bi-journal-check"></i></div>
+                        <h6 class="text-muted">已解鎖課程</h6>
+                        <p class="fs-2 fw-bold mb-0">2</p>
+                    </div>
                 </div>
-                <div class="mb-3 text-start">
-                    <label class="form-label small">學號</label>
-                    <input type="text" id="NumberInput" class="form-control" placeholder="請輸入學號" required>
+                <div class="col-md-4">
+                    <div class="card p-4 text-center border-start border-success border-5">
+                        <div class="course-icon text-success mb-2"><i class="bi bi-trophy"></i></div>
+                        <h6 class="text-muted">獲得成就</h6>
+                        <p class="fs-2 fw-bold mb-0">0</p>
+                    </div>
                 </div>
-                <div class="mb-3 text-start">
-                    <label class="form-label small">設定密碼</label>
-                    <input type="password" id="passwordInput" class="form-control" placeholder="至少 6 位數密碼" required>
+            </div>
+
+            <h4 class="fw-bold mb-4"><i class="bi bi-collection-play me-2"></i>您的專屬教材</h4>
+            <div class="row g-4">
+                <div class="col-md-6 col-xl-4">
+                    <div class="card h-100 p-2">
+                        <div class="card-body">
+                            <div class="text-primary mb-3"><i class="bi bi-gear-wide-connected fs-1"></i></div>
+                            <h5 class="card-title fw-bold">Unity 環境與安裝</h5>
+                            <p class="card-text text-muted small">快速掌握 Unity Hub 與編輯器介面操作。</p>
+                            <a href="IFAIE.html" class="btn btn-outline-primary w-100 rounded-pill">進入課程</a>
+                        </div>
+                    </div>
                 </div>
-                
-                <button type="submit" id="submitBtn" class="btn btn-unity w-100 rounded-pill mb-3">註冊帳號</button>
-                
-                <div class="small">
-                    <span class="text-white-50">已經有帳號了？</span>
-                    <a href="login.html" class="text-info text-decoration-none">立即登入</a>
+
+                <div class="col-md-6 col-xl-4">
+                    <div class="card h-100 p-2">
+                        <div class="card-body">
+                            <div class="text-success mb-3"><i class="bi bi-person-walking fs-1"></i></div>
+                            <h5 class="card-title fw-bold">2D 角色移動與腳本</h5>
+                            <p class="card-text text-muted small">撰寫 C# 腳本，實現物理引擎與輸入控制。</p>
+                            <a href="2DI.html" class="btn btn-outline-success w-100 rounded-pill">進入課程</a>
+                        </div>
+                    </div>
                 </div>
-            </form>
-        </div>
+
+                <div class="col-md-6 col-xl-4">
+                    <div class="card h-100 p-2 opacity-75 bg-light">
+                        <div class="card-body text-center d-flex flex-column justify-content-center">
+                            <div class="text-muted mb-2"><i class="bi bi-lock fs-1"></i></div>
+                            <h5 class="card-title text-muted fw-bold">進階 AI 敵人行為</h5>
+                            <p class="small text-muted">即將推出...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
     </div>
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-        // Firebase 配置
-        const firebaseConfig = {
-            apiKey: "AIzaSyBKTDQ3nXOJjbJ7g-ip5Sdr32BaMzGcQEQ",
-            authDomain: "unity-study-web.firebaseapp.com",
-            projectId: "unity-study-web",
-            storageBucket: "unity-study-web.firebasestorage.app",
-            messagingSenderId: "970659563747",
-            appId: "1:970659563747:web:6ea9ab6e530b28061cddd6",
-            measurementId: "G-B41N9ZHECL"
-        };
+    const firebaseConfig = {
+        apiKey: "AIzaSyBKTDQ3nXOJjbJ7g-ip5Sdr32BaMzGcQEQ",
+        authDomain: "unity-study-web.firebaseapp.com",
+        projectId: "unity-study-web",
+        storageBucket: "unity-study-web.firebasestorage.app",
+        messagingSenderId: "970659563747",
+        appId: "1:970659563747:web:6ea9ab6e530b28061cddd6",
+        measurementId: "G-B41N9ZHECL"
+    };
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth();
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
 
-        const registerForm = document.getElementById('registerForm');
-        const submitBtn = document.getElementById('submitBtn');
+    // 驗證狀態
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            const studentId = user.email.split('@')[0];
+            document.getElementById('displayStudentId').innerText = studentId;
+            document.getElementById('displayStudentName').innerText = studentId + " 同學";
+        } else {
+            alert("偵測到未登入，請先進行身份驗證！");
+            window.location.href = "login.html";
+        }
+    });
 
-        if (registerForm) {
-            registerForm.addEventListener('submit', (e) => {
-                e.preventDefault(); 
-
-                const studentNumber = document.getElementById('NumberInput').value;
-                const password = document.getElementById('passwordInput').value;
-
-                // 技巧：將學號偽裝成 Email
-                const email = studentNumber + "@test.com";
-
-                submitBtn.disabled = true;
-                submitBtn.innerText = "註冊中...";
-
-                createUserWithEmailAndPassword(auth, email, password)
-                    .then((userCredential) => {
-                        alert("註冊成功！現在幫你跳轉到登入頁面。");
-                        window.location.href = "login.html";
-                    })
-                    .catch((error) => {
-                        submitBtn.disabled = false;
-                        submitBtn.innerText = "註冊帳號";
-
-                        let errorMsg = "註冊失敗：" + error.message;
-                        if (error.code === 'auth/email-already-in-use') errorMsg = "此學號已註冊過囉！";
-                        if (error.code === 'auth/weak-password') errorMsg = "密碼太簡單，請至少輸入 6 位數。";
-                        
-                        alert(errorMsg);
-                    });
+    // 登出
+    document.getElementById('logoutBtn').addEventListener('click', (e) => {
+        e.preventDefault();
+        if(confirm("確定要登出嗎？")) {
+            signOut(auth).then(() => {
+                window.location.href = "login.html";
             });
         }
-    </script>
+    });
+</script>
 </body>
 </html>

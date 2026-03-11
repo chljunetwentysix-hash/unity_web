@@ -107,7 +107,8 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+        // 修改處：新增引入 updateProfile
+        import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
         // Firebase 配置
         const firebaseConfig = {
@@ -130,10 +131,10 @@
             registerForm.addEventListener('submit', (e) => {
                 e.preventDefault(); 
 
+                const userName = document.getElementById('NameInput').value; // 取得暱稱
                 const studentNumber = document.getElementById('NumberInput').value;
                 const password = document.getElementById('passwordInput').value;
 
-                // 技巧：將學號偽裝成 Email
                 const email = studentNumber + "@test.com";
 
                 submitBtn.disabled = true;
@@ -141,6 +142,12 @@
 
                 createUserWithEmailAndPassword(auth, email, password)
                     .then((userCredential) => {
+                        // 修改處：註冊成功後立即寫入暱稱
+                        return updateProfile(userCredential.user, {
+                            displayName: userName
+                        });
+                    })
+                    .then(() => {
                         alert("註冊成功！現在幫你跳轉到登入頁面。");
                         window.location.href = "login.html";
                     })
