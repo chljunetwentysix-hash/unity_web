@@ -146,7 +146,7 @@
                     window.location.href = "login.html"; // 成功後跳轉
                     })
                     .catch((error) => {
-                    // 常見錯誤：auth/email-already-in-use (帳號已存在)
+                    // 常見錯誤：auth/Number-already-in-use (帳號已存在)
                     // 常見錯誤：auth/weak-password (密碼太短)
                     alert("註冊失敗：" + error.message);
                     });
