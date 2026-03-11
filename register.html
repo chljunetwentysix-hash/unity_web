@@ -109,43 +109,49 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!--連接資料庫-->
         <script type="module">
-    // 引入 Firebase SDK (CDN 版本)
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+            import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
 
-    // 1. 將剛才在 Firebase 複製的 Config 貼在這裡
-    const firebaseConfig = {
-        apiKey: "YOUR_API_KEY",
-        authDomain: "unity-study-web.firebaseapp.com",
-        projectId: "unity-study-web",
-        storageBucket: "unity-study-web.appspot.com",
-        messagingSenderId: "...",
-        appId: "..."
-    };
+            // 1. Firebase 配置 
+            const firebaseConfig = {
+                apiKey: "AIzaSyBKTDQ3nXOJjbJ7g-ip5Sdr32BaMzGcQEQ",
+                authDomain: "unity-study-web.firebaseapp.com",
+                projectId: "unity-study-web",
+                storageBucket: "unity-study-web.firebasestorage.app",
+                messagingSenderId: "970659563747",
+                appId: "1:970659563747:web:6ea9ab6e530b28061cddd6",
+                measurementId: "G-B41N9ZHECL"
+            };
 
-    // 初始化 Firebase
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth();
+            // 初始化 Firebase
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth();
 
-    // 2. 監聽註冊按鈕 (請確認你的 HTML input ID 是否對應)
-    const submitBtn = document.querySelector('#register-button'); // 這裡填入你按鈕的 ID
+            // 2. 註冊邏輯
+            // 請確認你HTML 中：
+            // 註冊按鈕 id="submitBtn"
+            // 學號輸入框 id="NumberInput"
+            // 密碼輸入框 id="passwordInput"
+            const submitBtn = document.getElementById('submitBtn');
 
-    if(submitBtn) {
-        submitBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        const number = document.querySelector('#number-input').value; // 這裡填入學號 ID
-        const password = document.querySelector('#password-input').value; // 這裡填入密碼框 ID
+            if (submitBtn) {
+                submitBtn.addEventListener('click', (e) => {
+                e.preventDefault(); // 避免網頁重新整理
+                const Number = document.getElementById('NumberInput').value;
+                const password = document.getElementById('passwordInput').value;
 
-        createUserWithNumberAndPassword(auth, number, password)
-            .then((userCredential) => {
-            alert("雲端社員註冊成功！");
-            window.location.href = "login.html";
-            })
-            .catch((error) => {
-            alert("註冊出錯了：" + error.message);
-            });
-        });
-    }
-    </script>
+                createUserWithNumberAndPassword(auth, Number, password)
+                    .then((userCredential) => {
+                    alert("註冊成功！現在幫你轉跳到登入頁面。");
+                    window.location.href = "login.html"; // 成功後跳轉
+                    })
+                    .catch((error) => {
+                    // 常見錯誤：auth/email-already-in-use (帳號已存在)
+                    // 常見錯誤：auth/weak-password (密碼太短)
+                    alert("註冊失敗：" + error.message);
+                    });
+                });
+            }
+            </script>
 </body>
 </html>
