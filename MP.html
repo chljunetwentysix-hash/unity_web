@@ -13,12 +13,20 @@
                 transition: 0.3s;
                 box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             }
+            /* 登入按鈕樣式優化 */
+            #userAuthStatus .btn-dashboard {
+                background-color: #0d6efd;
+                color: white;
+                border-radius: 20px;
+                padding: 5px 15px;
+                font-size: 0.85rem;
+            }
         </style>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
             <div class="container-fluid">
-                <a class="navbar-brand" href="Index.html">Unity教學網站</a>
+                <a class="navbar-brand fw-bold" href="index.html">Unity教學網站</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -42,13 +50,11 @@
                             </ul>
                         </li>
                     </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                        <a href="login.html" class="link-dark text-decoration-none d-flex align-items-center px-2">
+                    <div class="d-flex align-items-center" id="userAuthStatus">
+                        <a href="login.html" class="link-dark text-decoration-none px-2" title="會員登入">
                             <i class="bi bi-person-circle fs-3"></i>
                         </a>
-                    </form>
+                    </div>
                 </div>
             </div>
         </nav>
@@ -57,147 +63,148 @@
             <div class="row mb-1">
                 <div class="col">
                     <h2 class="fw-bold"><i class="bi bi-palette2 me-2 text-primary"></i>找尋與製作遊戲素材</h2>
-                    <p class="text-muted">遊戲的靈魂在於視覺與聽覺，推薦的免費資源庫。</p>
+                    <p class="text-muted">遊戲的靈魂在於視覺與聽覺，以下是推薦的免費資源庫。</p>
                 </div>
             </div>
             <hr>
-            <!--免費制式資源-->
-            <div class="row g-4 justify-content-center">
+
             <div class="row g-4">
                 <div class="col-md-4">
-                    <div class="card h-100 resource-card">
+                    <div class="card h-100 resource-card shadow-sm border-0">
                         <div class="card-body">
-                            <h5 class="card-title fw-bold">Unity Asset Store</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">官方資源商店</h6>
-                            <p class="card-text">最直接的管道，許多免費的高品質 2D 角色與環境包可以直接匯入 Unity。</p>
-                            <a href="https://assetstore.unity.com/" target="_blank" class="btn btn-sm btn-primary">前往網站</a>
+                            <h5 class="card-title fw-bold text-primary">Unity Asset Store</h5>
+                            <h6 class="card-subtitle mb-2 text-muted small">官方資源商店</h6>
+                            <p class="card-text small">最直接的管道，許多免費的高品質 2D 角色與環境包可以直接匯入 Unity。</p>
+                            <a href="https://assetstore.unity.com/" target="_blank" class="btn btn-sm btn-outline-primary">前往網站</a>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-4">
-                    <div class="card h-100 resource-card">
+                    <div class="card h-100 resource-card shadow-sm border-0">
                         <div class="card-body">
-                            <h5 class="card-title fw-bold">Itch.io (Free Assets)</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">獨立遊戲天堂</h6>
-                            <p class="card-text">擁有大量像素風格（Pixel Art）的免費素材，非常適合做 2D 橫向卷軸遊戲。</p>
-                            <a href="https://itch.io/game-assets/free" target="_blank" class="btn btn-sm btn-primary">前往網站</a>
+                            <h5 class="card-title fw-bold text-primary">Itch.io (Free)</h5>
+                            <h6 class="card-subtitle mb-2 text-muted small">獨立遊戲天堂</h6>
+                            <p class="card-text small">擁有大量像素風格（Pixel Art）的免費素材，非常適合做 2D 橫向卷軸遊戲。</p>
+                            <a href="https://itch.io/game-assets/free" target="_blank" class="btn btn-sm btn-outline-primary">前往網站</a>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-md-4">
-                    <div class="card h-100 resource-card">
+                    <div class="card h-100 resource-card shadow-sm border-0">
                         <div class="card-body">
-                            <h5 class="card-title fw-bold">Kenney Assets</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">極簡與高品質</h6>
-                            <p class="card-text">完全免費且無版權問題，素材風格統一，非常適合新手練習使用。</p>
-                            <a href="https://kenney.nl/assets" target="_blank" class="btn btn-sm btn-primary">前往網站</a>
+                            <h5 class="card-title fw-bold text-primary">Kenney Assets</h5>
+                            <h6 class="card-subtitle mb-2 text-muted small">極簡與高品質</h6>
+                            <p class="card-text small">完全免費且無版權問題，素材風格統一，非常適合新手練習使用。</p>
+                            <a href="https://kenney.nl/assets" target="_blank" class="btn btn-sm btn-outline-primary">前往網站</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 resource-card shadow-sm border-0">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold text-primary">GameArt2D</h5>
+                            <h6 class="card-subtitle mb-2 text-muted small">精緻 2D 角色</h6>
+                            <p class="card-text small">提供許多「Freebies」系列，包含已切好的角色動畫與地圖貼圖塊。</p>
+                            <a href="https://www.gameart2d.com/freebies.html" target="_blank" class="btn btn-sm btn-outline-primary">前往網站</a>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <div class="card h-100 resource-card">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">GameArt2D</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">精緻 2D 角色</h6>
-                        <p class="card-text">提供許多「Freebies」系列，包含已切好的角色動畫與地圖貼圖塊。</p>
-                        <a href="https://www.gameart2d.com/freebies.html" target="_blank" class="btn btn-sm btn-primary">前往網站</a>
-                    </div>
-                    </div>
+            <div class="row mt-5 mb-4">
+                <div class="col">
+                    <h2 class="fw-bold"><i class="bi bi-robot me-2 text-danger"></i>使用 AI 快速製作素材</h2>
+                    <p class="text-muted">利用即時生成技術，將靈感轉化為高品質的遊戲資產。</p>
+                    <hr>
                 </div>
             </div>
-            <!--採用AI製作資源-->
-                <div class="row mt-5 mb-4">
-                    <div class="col">
-                        <h2 class="fw-bold"><i class="bi bi-robot me-2 text-danger"></i>使用 AI 快速製作遊戲素材</h2>
-                        <p class="text-muted">利用即時生成技術，將靈感轉化為高品質的遊戲資產。</p>
-                        <hr>
-                    </div>
-                </div>
 
-                <div class="row g-4 justify-content-center">
-                    <div class="col-md-4">
-                        <div class="card h-100 resource-card border-danger shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title fw-bold">Ideogram</h5>
-                                <h6 class="card-subtitle mb-2 text-danger">精準文字與背景設計</h6>
-                                <p class="card-text">目前最強大的文字生成 AI。非常適合製作遊戲的標題頁、帶有文字的遊戲物件或宣傳海報。</p>
-                                <a href="https://ideogram.ai/" target="_blank" class="btn btn-sm btn-danger">前往網站</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card h-100 resource-card border-danger shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title fw-bold">Freepik AI (Pikaso)</h5>
-                                <h6 class="card-subtitle mb-2 text-danger">即時靈感轉化工具</h6>
-                                <p class="card-text">支援「邊畫邊生成」，能快速將簡單的草圖轉變為高品質的遊戲貼圖或 UI 圖示。</p>
-                                <a href="https://www.freepik.com/pikaso/ai-image-generator/" target="_blank" class="btn btn-sm btn-danger">前往網站</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card h-100 resource-card border-danger shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title fw-bold">Photopea</h5>
-                                <h6 class="card-subtitle mb-2 text-danger">網頁版 Photoshop</h6>
-                                <p class="card-text">最強線上修圖軟體，支援 PSD 檔與高級圖層編輯，是最後精修素材的終點站。</p>
-                                <a href="https://www.photopea.com/" target="_blank" class="btn btn-sm btn-danger">前往網站</a>
-                            </div>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 resource-card border-danger shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Ideogram</h5>
+                            <h6 class="card-subtitle mb-2 text-danger small">精準文字與背景</h6>
+                            <p class="card-text small">適合製作遊戲的標題頁、帶有文字的遊戲物件或宣傳海報。</p>
+                            <a href="https://ideogram.ai/" target="_blank" class="btn btn-sm btn-danger">前往網站</a>
                         </div>
                     </div>
                 </div>
-            <!--給予提示-->
-            <div class="alert alert-warning mt-4" role="alert">
-                <h5 class="alert-heading fw-bold"><i class="bi bi-lightbulb"></i> AI 製作小技巧：</h5>
-                <p>生成素材時，建議在關鍵字加上 <b>"2D game asset, side scrolling, white background, sprite sheet"</b>，這樣 AI 生成的圖會更容易去背並直接在 Unity 中使用喔！</p>
-            </div>
-            <!--修剪背景-->
-            <div class="row g-4 justify-content-center">
+
+                <div class="col-md-4">
+                    <div class="card h-100 resource-card border-danger shadow-sm">
+                        <div class="card-body">
+                            <h5 class="card-title fw-bold">Freepik AI</h5>
+                            <h6 class="card-subtitle mb-2 text-danger small">即時靈感轉化</h6>
+                            <p class="card-text small">支援「邊畫邊生成」，能快速將草圖轉變為高品質貼圖或圖示。</p>
+                            <a href="https://www.freepik.com/pikaso/ai-image-generator/" target="_blank" class="btn btn-sm btn-danger">前往網站</a>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="col-md-4">
                     <div class="card h-100 resource-card border-danger shadow-sm">
                         <div class="card-body">
                             <h5 class="card-title fw-bold">AI Ease</h5>
-                            <h6 class="card-subtitle mb-2 text-danger">一鍵去背與畫質增強</h6>
-                            <p class="card-text">專門處理素材去背。將 AI 產出的圖片轉為透明背景 PNG，直接匯入 Unity 使用。</p>
+                            <h6 class="card-subtitle mb-2 text-danger small">一鍵去背與增強</h6>
+                            <p class="card-text small">將 AI 產出的圖片轉為透明背景 PNG，直接匯入 Unity 使用。</p>
                             <a href="https://www.aiease.ai/remove-object-from-photo/" target="_blank" class="btn btn-sm btn-danger">前往網站</a>
                         </div>
                     </div>
                 </div>
-
-                <div class="col-md-4">
-                    <div class="card h-100 resource-card border-danger shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Fotor</h5>
-                            <h6 class="card-subtitle mb-2 text-danger">全能 AI 影像編輯器</h6>
-                            <p class="card-text">支援擴圖、物件移除與 UI 設計。素材生成後進行微調的最佳工具。</p>
-                            <a href="https://www.fotor.com/tw/" target="_blank" class="btn btn-sm btn-danger">前往網站</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card h-100 resource-card border-danger shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Hailuo AI (海螺)</h5>
-                            <h6 class="card-subtitle mb-2 text-danger">頂尖 AI 影片生成器</h6>
-                            <p class="card-text">只需文字或圖片，即可生成高畫質、動作流暢的影片。最適合製作遊戲過場動畫、動態標題背景與特效參考。</p>
-                            <a href="https://hailuoai.video/" target="_blank" class="btn btn-sm btn-danger">前往網站</a>
-                        </div>
-                    </div>
-                </div>
             </div>
 
-            <!--換頁-->
-            <div class="d-flex justify-content-between mt-5">
-                <a href="index.html" class="btn btn-outline-secondary">← 回首頁</a>
+            <div class="alert alert-warning mt-5 shadow-sm border-0" role="alert">
+                <h5 class="alert-heading fw-bold"><i class="bi bi-lightbulb"></i> AI 製作小技巧：</h5>
+                <p class="mb-0 small">生成素材時，建議加上關鍵字：<b>"2D game asset, side scrolling, white background, sprite sheet"</b>，能更方便後續去背喔！</p>
             </div>
 
+            <div class="d-flex justify-content-between mt-5 pt-4 border-top">
+                <a href="IFAIE.html" class="btn btn-outline-secondary">← 上一步</a>
+                <a href="index.html" class="btn btn-outline-secondary">回首頁</a>
+                <a href="2DI.html" class="btn btn-primary">進入 2D 課程 →</a>
+            </div>
         </div>
+
+        <script type="module">
+            import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+            import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+            const firebaseConfig = {
+                apiKey: "AIzaSyBKTDQ3nXOJjbJ7g-ip5Sdr32BaMzGcQEQ",
+                authDomain: "unity-study-web.firebaseapp.com",
+                projectId: "unity-study-web",
+                storageBucket: "unity-study-web.firebasestorage.app",
+                messagingSenderId: "970659563747",
+                appId: "1:970659563747:web:6ea9ab6e530b28061cddd6"
+            };
+
+            const app = initializeApp(firebaseConfig);
+            const auth = getAuth();
+            const userStatusDiv = document.getElementById('userAuthStatus');
+
+            // 監聽登入狀態並更新導覽列 UI
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    const studentId = user.email.split('@')[0];
+                    userStatusDiv.innerHTML = `
+                        <span class="small me-2 text-primary fw-bold">${studentId} 同學</span>
+                        <a href="dashboard.html" class="btn btn-dashboard btn-sm shadow-sm">
+                            <i class="bi bi-speedometer2 me-1"></i>後台
+                        </a>
+                    `;
+                } else {
+                    // 未登入狀態
+                    userStatusDiv.innerHTML = `
+                        <a href="login.html" class="link-dark text-decoration-none px-2" title="會員登入">
+                            <i class="bi bi-person-circle fs-3"></i>
+                        </a>
+                    `;
+                }
+            });
+        </script>
     </body>
 </html>
