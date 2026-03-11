@@ -65,7 +65,7 @@
                         <h6 class="fw-bold"><i class="bi bi-info-circle me-2"></i>繳交規範</h6>
                         <ul class="mb-0 small">
                             <li>請務必先將 Unity 專案資料夾壓縮為 <strong>.zip</strong> 檔。</li>
-                            <li>上傳過程中請勿關閉網頁。</li>
+                            <li>若上傳失敗，請使用系統自動彈出的 **「Google 表單」** 通道。</li>
                             <li>重複上傳將會覆蓋舊有的檔案（以學號命名）。</li>
                         </ul>
                     </div>
@@ -80,7 +80,6 @@
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
     import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
-    // 引入 Storage 模組
     import { getStorage, ref, uploadBytesResumable } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js";
 
     const firebaseConfig = {
@@ -97,50 +96,41 @@
     const auth = getAuth();
     const storage = getStorage(app);
 
-    let userEmail = "";
+    let currentStudentId = "";
 
-    // 驗證狀態
+    // 1. 監測登入狀態
     onAuthStateChanged(auth, (user) => {
         if (user) {
-            const studentId = user.email.split('@')[0];
-            userEmail = user.email;
-            const displayName = user.displayName ? user.displayName : studentId;
-            document.getElementById('displayStudentId').innerText = studentId;
+            currentStudentId = user.email.split('@')[0];
+            const displayName = user.displayName || currentStudentId;
+            document.getElementById('displayStudentId').innerText = currentStudentId;
             document.getElementById('displayStudentName').innerText = displayName + " 同學";
         } else {
             window.location.href = "login.html";
         }
     });
 
-    // 上傳功能
     const fileInput = document.getElementById('fileInput');
     const uploadBtn = document.getElementById('uploadBtn');
     const uploadStatusArea = document.getElementById('uploadStatusArea');
     const progressBar = document.getElementById('progressBar');
     const statusText = document.getElementById('statusText');
 
+    // 2. 上傳核心邏輯
     uploadBtn.addEventListener('click', () => {
         const file = fileInput.files[0];
         
-        if (!file) {
-            alert("請先選擇檔案！");
-            return;
-        }
+        if (!file) { alert("請先選擇檔案！"); return; }
+        if (!file.name.toLowerCase().endsWith('.zip')) { alert("目前僅接受 .zip 壓縮格式！"); return; }
 
-        // 副檔名檢查
-        if (!file.name.toLowerCase().endsWith('.zip')) {
-            alert("目前僅接受 .zip 壓縮檔案格式！");
-            return;
-        }
-
-        const studentId = userEmail.split('@')[0];
-        // 檔案命名規則：uploads/學號_檔名
-        const safeFileName = file.name.replace(/\s+/g, '_'); // 將空格替換為底線
-        const storageRef = ref(storage, `uploads/${studentId}/${safeFileName}`);
+        // 格式化路徑：避免空格導致的 URL 報錯
+        const safeFileName = file.name.replace(/\s+/g, '_');
+        const storageRef = ref(storage, `uploads/${currentStudentId}/${safeFileName}`);
         const uploadTask = uploadBytesResumable(storageRef, file);
 
         uploadBtn.disabled = true;
         uploadStatusArea.classList.remove('d-none');
+        statusText.innerText = "正在嘗試建立伺服器連線...";
 
         uploadTask.on('state_changed', 
             (snapshot) => {
@@ -149,20 +139,39 @@
                 statusText.innerText = `上傳進度：${Math.round(progress)}%`;
             }, 
             (error) => {
-                console.error(error);
-                alert("上傳失敗，請確認 Firebase Storage 規則已開啟！");
-                uploadBtn.disabled = false;
+                console.error("Firebase Storage Error:", error);
+                
+                // 處理失敗邏輯：由於 Storage 需要付費方案，此處會觸發錯誤
+                statusText.innerHTML = `<span class='text-danger'>⚠️ 儲存空間服務異常 (Error: ${error.code})</span>`;
+                
+                setTimeout(() => {
+                    if(confirm("偵測到您的瀏覽器或伺服器目前無法直接上傳。\n是否改用「Google 表單」備用通道提交 ZIP 檔？")) {
+                        // 【請將下方網址替換為你的 Google 表單連結】
+                        const backupURL = "https://docs.google.com/forms/d/e/你的表單ID/viewform";
+                        window.open(backupURL, "_blank");
+                    }
+                    uploadBtn.disabled = false;
+                    uploadStatusArea.classList.add('d-none');
+                }, 800);
             }, 
             () => {
                 statusText.innerHTML = "<span class='text-success fw-bold'>✅ 上傳成功！已送交老師。</span>";
-                alert("檔案上傳成功！");
+                alert("檔案已成功儲存至 Firebase！");
                 uploadBtn.disabled = false;
                 fileInput.value = ""; 
             }
         );
     });
 
-    // 登出
+    // 3. 預防上傳中關閉視窗
+    window.onbeforeunload = (e) => {
+        if (uploadBtn.disabled) {
+            e.preventDefault();
+            return "檔案正在上傳中，離開將導致失敗！";
+        }
+    };
+
+    // 4. 登出功能
     document.getElementById('logoutBtn').addEventListener('click', (e) => {
         e.preventDefault();
         if(confirm("確定要登出嗎？")) {
