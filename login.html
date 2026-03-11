@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
     <title>會員登入 - Unity教學網站</title>
     <style>
-        /* 背景設定：讓背景圖鋪滿整個視窗 */
         body {
             background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
                         url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=1920');
@@ -16,16 +15,12 @@
             background-attachment: fixed;
             min-height: 100vh;
             display: flex;
-            flex-direction: column; /* 讓 nav 和登入框垂直排列 */
+            flex-direction: column;
         }
-
-        /* 導覽列透明化處理 (選用，增加設計感) */
         .navbar {
             background-color: rgba(255, 255, 255, 0.9) !important;
             backdrop-filter: blur(5px);
         }
-
-        /* 登入框容器：撐開高度讓卡片置中 */
         .login-wrapper {
             flex-grow: 1;
             display: flex;
@@ -33,8 +28,6 @@
             justify-content: center;
             padding: 20px;
         }
-
-        /* 毛玻璃登入卡片 */
         .login-card {
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(15px);
@@ -46,24 +39,19 @@
             color: white;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
         }
-
         .form-control {
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
+            color: white !important;
         }
-
         .form-control::placeholder {
             color: rgba(255, 255, 255, 0.6);
         }
-
         .form-control:focus {
             background: rgba(255, 255, 255, 0.2);
-            color: white;
             box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
             border-color: #0d6efd;
         }
-
         .btn-unity {
             background: #0d6efd;
             border: none;
@@ -71,7 +59,6 @@
             font-weight: 600;
             transition: all 0.3s ease;
         }
-
         .btn-unity:hover {
             background: #0b5ed7;
             transform: translateY(-2px);
@@ -106,10 +93,6 @@
                     </li>
                 </ul>
                 <div class="d-flex align-items-center">
-                    <form class="d-flex me-3" role="search">
-                        <input class="form-control text-dark me-2" type="search" placeholder="Search" style="background:white;">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
                     <a href="login.html" class="link-dark px-2"><i class="bi bi-person-circle fs-3"></i></a>
                 </div>
             </div>
@@ -121,29 +104,29 @@
             <div class="mb-4">
                 <div class="display-4 mb-2"><i class="bi bi-unity text-info"></i></div>
                 <h2 class="fw-bold">Member Login</h2>
-                <p class="text-white-50">歡迎回來！請登入您的帳號</p>
+                <p class="text-white-50">歡迎回來！請使用學號登入</p>
             </div>
 
-            <form>
+            <form id="loginForm">
                 <div class="mb-3 text-start">
-                    <label class="form-label small">帳號 / 學號</label>
+                    <label class="form-label small">學號</label>
                     <div class="input-group">
-                        <span class="input-group-text bg-transparent text-white border-end-0"><i class="bi-person-vcard"></i></span>
-                        <input type="text" id="NumberInput" class="form-control border-start-0" placeholder="學號">
+                        <span class="input-group-text bg-transparent text-white border-end-0"><i class="bi bi-person-vcard"></i></span>
+                        <input type="text" id="NumberInput" class="form-control border-start-0" placeholder="請輸入學號" required>
                     </div>
                 </div>
                 <div class="mb-4 text-start">
                     <label class="form-label small">密碼</label>
                     <div class="input-group">
                         <span class="input-group-text bg-transparent text-white border-end-0"><i class="bi bi-lock"></i></span>
-                        <input type="password" class="form-control border-start-0" placeholder="••••••••">
+                        <input type="password" id="passwordInput" class="form-control border-start-0" placeholder="••••••••" required>
                     </div>
                 </div>
                 
-                <button type="submit" class="btn btn-unity w-100 rounded-pill mb-3">立即登入</button>
+                <button type="submit" id="submitBtn" class="btn btn-unity w-100 rounded-pill mb-3">立即登入</button>
                 
                 <div class="d-flex justify-content-between small px-1">
-                    <a href="#" class="text-white-50 text-decoration-none hover-white">忘記密碼？(未建)</a>
+                    <a href="#" class="text-white-50 text-decoration-none">忘記密碼？</a>
                     <a href="register.html" class="text-info text-decoration-none">註冊新帳號</a>
                 </div>
             </form>
@@ -151,5 +134,60 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // 專案配置
+        const firebaseConfig = {
+            apiKey: "AIzaSyBKTDQ3nXOJjbJ7g-ip5Sdr32BaMzGcQEQ",
+            authDomain: "unity-study-web.firebaseapp.com",
+            projectId: "unity-study-web",
+            storageBucket: "unity-study-web.firebasestorage.app",
+            messagingSenderId: "970659563747",
+            appId: "1:970659563747:web:6ea9ab6e530b28061cddd6",
+            measurementId: "G-B41N9ZHECL"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+
+        const loginForm = document.getElementById('loginForm');
+        const submitBtn = document.getElementById('submitBtn');
+
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // 防止表單預設跳轉
+
+            const studentNumber = document.getElementById('NumberInput').value;
+            const password = document.getElementById('passwordInput').value;
+            
+            // 轉換為 Firebase 格式
+            const email = studentNumber + "@test.com";
+
+            // 鎖定按鈕避免重複提交
+            submitBtn.disabled = true;
+            submitBtn.innerText = "驗證中...";
+
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    alert("登入成功！");
+                    window.location.href = "index.html"; 
+                })
+                .catch((error) => {
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "立即登入";
+
+                    // 錯誤提示優化
+                    let errorMsg = "登入失敗，請檢查網路連線。";
+                    if (error.code === 'auth/user-not-found') errorMsg = "找不到此學號，請先註冊。";
+                    if (error.code === 'auth/wrong-password') errorMsg = "密碼錯誤，請再試一次。";
+                    if (error.code === 'auth/invalid-credential') errorMsg = "學號或密碼錯誤。";
+                    
+                    alert(errorMsg);
+                    console.error("Firebase Error:", error.code);
+                });
+        });
+    </script>
 </body>
 </html>

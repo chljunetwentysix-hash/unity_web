@@ -1,206 +1,161 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-        <title>找尋素材 - Unity教學網站</title>
-        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-        <style>
-            .resource-card:hover {
-                transform: translateY(-5px);
-                transition: 0.3s;
-                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            }
-        </style>
-    </head>
-    <body>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="Index.html">Unity教學網站</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="Index.html">Home</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown">前置作業</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="IFAIE.html">安裝檔案及整合環境</a></li>
-                                <li><a class="dropdown-item active" href="MP.html">找尋素材、製作素材</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="2DI.html" role="button" data-bs-toggle="dropdown">2D橫向卷軸遊戲</a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="2DI.html">主角設定</a></li>
-                                <li><a class="dropdown-item" href="#">背景設定</a></li>
-                                <li><a class="dropdown-item" href="#">物體碰撞</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">敵人設定</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <form class="d-flex" role="search">
-                        <input class="form-control me-2" type="search" placeholder="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                        <a href="login.html" class="link-dark text-decoration-none d-flex align-items-center px-2">
-                            <i class="bi bi-person-circle fs-3"></i>
-                        </a>
-                    </form>
-                </div>
-            </div>
-        </nav>
+<html lang="zh-Hant">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <title>註冊新帳號 - Unity教學網站</title>
+    <style>
+        body {
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), 
+                        url('https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&q=80&w=1920');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.9) !important;
+            backdrop-filter: blur(5px);
+        }
+        .register-wrapper {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+        .register-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 450px;
+            color: white;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        }
+        .form-control {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white !important;
+        }
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border-color: #0d6efd;
+            box-shadow: none;
+        }
+        .btn-unity {
+            background: #0d6efd;
+            border: none;
+            padding: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .btn-unity:hover {
+            background: #0b5ed7;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
 
-        <div class="container mt-5">
-            <div class="row mb-1">
-                <div class="col">
-                    <h2 class="fw-bold"><i class="bi bi-palette2 me-2 text-primary"></i>找尋與製作遊戲素材</h2>
-                    <p class="text-muted">遊戲的靈魂在於視覺與聽覺，推薦的免費資源庫。</p>
-                </div>
-            </div>
-            <hr>
-            <!--免費制式資源-->
-            <div class="row g-4 justify-content-center">
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card h-100 resource-card">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Unity Asset Store</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">官方資源商店</h6>
-                            <p class="card-text">最直接的管道，許多免費的高品質 2D 角色與環境包可以直接匯入 Unity。</p>
-                            <a href="https://assetstore.unity.com/" target="_blank" class="btn btn-sm btn-primary">前往網站</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card h-100 resource-card">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Itch.io (Free Assets)</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">獨立遊戲天堂</h6>
-                            <p class="card-text">擁有大量像素風格（Pixel Art）的免費素材，非常適合做 2D 橫向卷軸遊戲。</p>
-                            <a href="https://itch.io/game-assets/free" target="_blank" class="btn btn-sm btn-primary">前往網站</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card h-100 resource-card">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Kenney Assets</h5>
-                            <h6 class="card-subtitle mb-2 text-muted">極簡與高品質</h6>
-                            <p class="card-text">完全免費且無版權問題，素材風格統一，非常適合新手練習使用。</p>
-                            <a href="https://kenney.nl/assets" target="_blank" class="btn btn-sm btn-primary">前往網站</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card h-100 resource-card">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">GameArt2D</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">精緻 2D 角色</h6>
-                        <p class="card-text">提供許多「Freebies」系列，包含已切好的角色動畫與地圖貼圖塊。</p>
-                        <a href="https://www.gameart2d.com/freebies.html" target="_blank" class="btn btn-sm btn-primary">前往網站</a>
-                    </div>
-                    </div>
-                </div>
-            </div>
-            <!--採用AI製作資源-->
-                <div class="row mt-5 mb-4">
-                    <div class="col">
-                        <h2 class="fw-bold"><i class="bi bi-robot me-2 text-danger"></i>使用 AI 快速製作遊戲素材</h2>
-                        <p class="text-muted">利用即時生成技術，將靈感轉化為高品質的遊戲資產。</p>
-                        <hr>
-                    </div>
-                </div>
-
-                <div class="row g-4 justify-content-center">
-                    <div class="col-md-4">
-                        <div class="card h-100 resource-card border-danger shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title fw-bold">Ideogram</h5>
-                                <h6 class="card-subtitle mb-2 text-danger">精準文字與背景設計</h6>
-                                <p class="card-text">目前最強大的文字生成 AI。非常適合製作遊戲的標題頁、帶有文字的遊戲物件或宣傳海報。</p>
-                                <a href="https://ideogram.ai/" target="_blank" class="btn btn-sm btn-danger">前往網站</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card h-100 resource-card border-danger shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title fw-bold">Freepik AI (Pikaso)</h5>
-                                <h6 class="card-subtitle mb-2 text-danger">即時靈感轉化工具</h6>
-                                <p class="card-text">支援「邊畫邊生成」，能快速將簡單的草圖轉變為高品質的遊戲貼圖或 UI 圖示。</p>
-                                <a href="https://www.freepik.com/pikaso/ai-image-generator/" target="_blank" class="btn btn-sm btn-danger">前往網站</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card h-100 resource-card border-danger shadow-sm">
-                            <div class="card-body">
-                                <h5 class="card-title fw-bold">Photopea</h5>
-                                <h6 class="card-subtitle mb-2 text-danger">網頁版 Photoshop</h6>
-                                <p class="card-text">最強線上修圖軟體，支援 PSD 檔與高級圖層編輯，是最後精修素材的終點站。</p>
-                                <a href="https://www.photopea.com/" target="_blank" class="btn btn-sm btn-danger">前往網站</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            <!--給予提示-->
-            <div class="alert alert-warning mt-4" role="alert">
-                <h5 class="alert-heading fw-bold"><i class="bi bi-lightbulb"></i> AI 製作小技巧：</h5>
-                <p>生成素材時，建議在關鍵字加上 <b>"2D game asset, side scrolling, white background, sprite sheet"</b>，這樣 AI 生成的圖會更容易去背並直接在 Unity 中使用喔！</p>
-            </div>
-            <!--修剪背景-->
-            <div class="row g-4 justify-content-center">
-                <div class="col-md-4">
-                    <div class="card h-100 resource-card border-danger shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">AI Ease</h5>
-                            <h6 class="card-subtitle mb-2 text-danger">一鍵去背與畫質增強</h6>
-                            <p class="card-text">專門處理素材去背。將 AI 產出的圖片轉為透明背景 PNG，直接匯入 Unity 使用。</p>
-                            <a href="https://www.aiease.ai/remove-object-from-photo/" target="_blank" class="btn btn-sm btn-danger">前往網站</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card h-100 resource-card border-danger shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Fotor</h5>
-                            <h6 class="card-subtitle mb-2 text-danger">全能 AI 影像編輯器</h6>
-                            <p class="card-text">支援擴圖、物件移除與 UI 設計。素材生成後進行微調的最佳工具。</p>
-                            <a href="https://www.fotor.com/tw/" target="_blank" class="btn btn-sm btn-danger">前往網站</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card h-100 resource-card border-danger shadow-sm">
-                        <div class="card-body">
-                            <h5 class="card-title fw-bold">Hailuo AI (海螺)</h5>
-                            <h6 class="card-subtitle mb-2 text-danger">頂尖 AI 影片生成器</h6>
-                            <p class="card-text">只需文字或圖片，即可生成高畫質、動作流暢的影片。最適合製作遊戲過場動畫、動態標題背景與特效參考。</p>
-                            <a href="https://hailuoai.video/" target="_blank" class="btn btn-sm btn-danger">前往網站</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!--換頁-->
-            <div class="d-flex justify-content-between mt-5">
-                <a href="index.html" class="btn btn-outline-secondary">← 回首頁</a>
-            </div>
-
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="index.html">Unity教學網站</a>
         </div>
-    </body>
+    </nav>
+
+    <div class="register-wrapper">
+        <div class="register-card text-center">
+            <div class="mb-4">
+                <div class="display-6 mb-2 text-info"><i class="bi bi-person-plus-fill"></i></div>
+                <h2 class="fw-bold">Create Account</h2>
+                <p class="text-white-50 small">加入建功高中資訊社，開啟你的遊戲開發之路</p>
+            </div>
+
+            <form id="registerForm"> 
+                <div class="mb-3 text-start">
+                    <label class="form-label small">使用者名稱</label>
+                    <input type="text" id="NameInput" class="form-control" placeholder="您的姓名或暱稱" required>
+                </div>
+                <div class="mb-3 text-start">
+                    <label class="form-label small">學號</label>
+                    <input type="text" id="NumberInput" class="form-control" placeholder="請輸入學號" required>
+                </div>
+                <div class="mb-3 text-start">
+                    <label class="form-label small">設定密碼</label>
+                    <input type="password" id="passwordInput" class="form-control" placeholder="至少 6 位數密碼" required>
+                </div>
+                
+                <button type="submit" id="submitBtn" class="btn btn-unity w-100 rounded-pill mb-3">註冊帳號</button>
+                
+                <div class="small">
+                    <span class="text-white-50">已經有帳號了？</span>
+                    <a href="login.html" class="text-info text-decoration-none">立即登入</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+        // Firebase 配置
+        const firebaseConfig = {
+            apiKey: "AIzaSyBKTDQ3nXOJjbJ7g-ip5Sdr32BaMzGcQEQ",
+            authDomain: "unity-study-web.firebaseapp.com",
+            projectId: "unity-study-web",
+            storageBucket: "unity-study-web.firebasestorage.app",
+            messagingSenderId: "970659563747",
+            appId: "1:970659563747:web:6ea9ab6e530b28061cddd6",
+            measurementId: "G-B41N9ZHECL"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth();
+
+        const registerForm = document.getElementById('registerForm');
+        const submitBtn = document.getElementById('submitBtn');
+
+        if (registerForm) {
+            registerForm.addEventListener('submit', (e) => {
+                e.preventDefault(); 
+
+                const studentNumber = document.getElementById('NumberInput').value;
+                const password = document.getElementById('passwordInput').value;
+
+                // 技巧：將學號偽裝成 Email
+                const email = studentNumber + "@test.com";
+
+                submitBtn.disabled = true;
+                submitBtn.innerText = "註冊中...";
+
+                createUserWithEmailAndPassword(auth, email, password)
+                    .then((userCredential) => {
+                        alert("註冊成功！現在幫你跳轉到登入頁面。");
+                        window.location.href = "login.html";
+                    })
+                    .catch((error) => {
+                        submitBtn.disabled = false;
+                        submitBtn.innerText = "註冊帳號";
+
+                        let errorMsg = "註冊失敗：" + error.message;
+                        if (error.code === 'auth/email-already-in-use') errorMsg = "此學號已註冊過囉！";
+                        if (error.code === 'auth/weak-password') errorMsg = "密碼太簡單，請至少輸入 6 位數。";
+                        
+                        alert(errorMsg);
+                    });
+            });
+        }
+    </script>
+</body>
 </html>
