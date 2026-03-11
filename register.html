@@ -107,5 +107,45 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <<!--連接資料庫-->
+        <script type="module">
+    // 引入 Firebase SDK (CDN 版本)
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js";
+
+    // 1. 將剛才在 Firebase 複製的 Config 貼在這裡
+    const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "unity-study-web.firebaseapp.com",
+        projectId: "unity-study-web",
+        storageBucket: "unity-study-web.appspot.com",
+        messagingSenderId: "...",
+        appId: "..."
+    };
+
+    // 初始化 Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+
+    // 2. 監聽註冊按鈕 (請確認你的 HTML input ID 是否對應)
+    const submitBtn = document.querySelector('#register-button'); // 這裡填入你按鈕的 ID
+
+    if(submitBtn) {
+        submitBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const email = document.querySelector('#email-input').value; // 這裡填入信箱框 ID
+        const password = document.querySelector('#password-input').value; // 這裡填入密碼框 ID
+
+        createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+            alert("雲端會員註冊成功！");
+            window.location.href = "login.html";
+            })
+            .catch((error) => {
+            alert("註冊出錯了：" + error.message);
+            });
+        });
+    }
+    </script>
 </body>
 </html>
